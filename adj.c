@@ -1,41 +1,53 @@
-// Online C compiler (editor)
-// Write and run C online using this editor.
-
 #include <stdio.h>
 #include<stdlib.h>
 
 struct node{
-    int data;
+    int data ;
     struct node *next;
+    
 };
-
-struct node *adj[5];
-
-void add_edge(int u , int v){
-    struct node* new_node;
-    new_node=(struct node*)malloc(sizeof(struct node));
-    new_node->data = v;
-    new_node->next = adj[u];
-    adj[u]=new_node;
+struct node *adj[10];
+void add_edge(int u,int v){
+    struct node*newnode;
+    newnode=(struct node*)malloc(sizeof(struct node));
+    newnode->data=v;
+    newnode->next=adj[u];
+    adj[u]=newnode;
+    
 }
+
+void display(int vertices){
+    struct node *temp;
+    for(int i=0;i<vertices;i++){
+        temp=adj[i];
+        printf("%d->",i);
+        while(temp!=NULL){
+            printf("%d->",temp->data);
+            temp=temp->next;
+        }
+            printf("NULL\n");
+    }
+    
+}
+
 int main() {
-    int vertices , edges , u ,v;
-    
-    printf("enter vertices: ");
+    int vertices,edges,u,v;
+
+    printf("Number of vertices:");
     scanf("%d",&vertices);
-    
-    printf("enter edges: ");
+
+    printf("Number of edges:");
     scanf("%d",&edges);
-    
-    for(int i = 0 ; i < vertices ; i++){
-        adj[i] = NULL;
+
+    for(int i=0;i<vertices; i++){
+        adj[i]=NULL;
     }
-    
-    for(int i = 0 ; i < edges ; i++){
-        scanf("%d %d", &u , &v);
+
+for(int i=0;i<edges;i++){
+        scanf("%d %d",&u,&v);
     }
-    
-    add_edge(0,1);
-    add_edge(1,0);
+
+   add_edge(u,v);
+   add_edge(v,u); 
     return 0;
-} 
+}
